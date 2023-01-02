@@ -17,19 +17,22 @@ public class BpmDto {
 
     private Integer pulse;
 
-    private User user;
+    private long user_id;
+    private User uid;
 
 
 
     @Builder
-    public BpmDto(Integer sys ,Integer dia ,Integer pulse,User user)
+    public BpmDto(Integer sys ,Integer dia ,Integer pulse,User uid)
     {
         this.sys =sys;
         this.dia=dia;
         this.pulse=pulse;
-        this.user=user;
+        this.uid=uid;
 
     }
+
+
 
 
 }

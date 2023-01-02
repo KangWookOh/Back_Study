@@ -4,7 +4,6 @@ import com.example.intern2.web.auth.jwt.JwtProvider;
 import com.example.intern2.web.dto.BpmDto;
 import com.example.intern2.web.entity.Bpm;
 import com.example.intern2.web.service.BpmService;
-import io.jsonwebtoken.MalformedJwtException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +25,7 @@ public class BpmController {
     public ResponseEntity<Bpm> add(@RequestBody BpmDto bpmDto)
     {
         Bpm bpm = bpmService.input(bpmDto);
+        log.info("user ={}",bpmDto.getUid());
         return ResponseEntity.ok().body(bpm);
     }
     @GetMapping("/list")
@@ -34,8 +34,6 @@ public class BpmController {
         String token =jwtProvider.resolveToken(request);
         String userId = jwtProvider.getUserId(token);
         List<BpmDto> list = bpmService.getList(userId);
-        System.out.println(userId);
-        System.out.println(token);
         return ResponseEntity.ok().body(list);
     }
 

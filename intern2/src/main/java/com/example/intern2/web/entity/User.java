@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Entity
+@Setter
 @NoArgsConstructor
 public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +28,12 @@ public class User implements UserDetails {
     private String userPw;
 
     private String userName;
+
+
     @ElementCollection(fetch = FetchType.EAGER)
     @JsonIgnore
     private List<String> roles =new ArrayList<>();
+
 
     @Builder
     public User(String  userId, String userPw,String userName,List<String> roles)
