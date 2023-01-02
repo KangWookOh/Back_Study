@@ -1,0 +1,22 @@
+spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+  profiles:
+    include: jwt
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/chang?serverTimezone=Asia/Seoul
+    username: admin
+    password: root
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
