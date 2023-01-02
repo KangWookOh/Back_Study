@@ -9,14 +9,18 @@ import java.util.List;
 
 public interface BpmRepository extends JpaRepository<Bpm,Long> {
 
-    @Query("select b from Bpm b  where b.user.id=:userId")
-    Bpm findByUserId(@Param("userId")Long userId);
+    @Query("select b from Bpm b join fetch b.user u where u.userId=:userId")
+    Bpm findByUserId(@Param("userId")String userId);
 
     @Query("select b from Bpm b join fetch b.user u where u.id =:user")
     List<Bpm> findUserByBpm(@Param("user")Long id);
 
     @Query("select b from Bpm b join fetch b.user u where u.userId=:userId")
     List<Bpm> findUserByBpm(@Param("userId") String userId);
+
+    @Query("select b from Bpm b inner join  fetch  b.user u where u.id =:userId")
+    List<Bpm> findBpmByUser(@Param("id") Long id);
+
 
 
 
