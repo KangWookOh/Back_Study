@@ -16,16 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
+@RequestMapping("/api")
 public class BpmController {
     private final JwtProvider jwtProvider;
 
     private final BpmService bpmService;
 
-    @PostMapping("/addInfo")
+    @PostMapping("/register")
     public ResponseEntity<Bpm> add(@RequestBody BpmDto bpmDto)
     {
         Bpm bpm = bpmService.input(bpmDto);
-        log.info("user ={}",bpmDto.getUid());
         return ResponseEntity.ok().body(bpm);
     }
     @GetMapping("/list")

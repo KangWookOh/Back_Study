@@ -64,37 +64,44 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles
                 .stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return this.userPw;
     }
 
     @Override
     public String getUsername() {
-        return this.userId;
+        return this.userName;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

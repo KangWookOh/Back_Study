@@ -12,7 +12,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
     //User findByUserId(String userId);
 
     @Query("select u from User u where u.userId=:userId")
-    User findByUserId(@Param("userId") String userId);
+    Optional<User> findByUserId(@Param("userId") String userId);
+
+
+    @Query("select u from User u where u.userId=:userId")
+    User  findByUserId1(@Param("userId") String userId);
+
 
     @Query("select u from User u where u.userPw=:userPw")
     User findByUserPw(String userPw);
