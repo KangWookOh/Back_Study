@@ -56,11 +56,10 @@ public class JwtProvider {
                 .compact();
     }
 
-    public Long getValidationAccessTokenTime(){
+    public Long getValidationAccessTokenTime()
+    {
         return ACCESS_TOKEN_VALIDATiON_SECOND;
     }
-
-
 
     // Jwt 로 인증정보를 조회
     public Authentication getAuthentication(String token)
@@ -85,10 +84,6 @@ public class JwtProvider {
         String userId = String.valueOf(body.getSubject());
         return userId;
 
-
-
-
-
         //return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody().getSubject();
 
 //        Claims body = Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody();
@@ -101,8 +96,6 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }
-    //jwt 유효성 및 만료일자 확인
-    // jwt 의 유효성 및 만료일자 확인
     public boolean validationToken(String token) {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token);

@@ -2,7 +2,6 @@ package com.example.intern2.web.dto.login;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @Getter
 @Setter

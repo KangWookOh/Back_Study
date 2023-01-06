@@ -41,7 +41,7 @@ public class BpmService {
     @Transactional
     public List<BpmDto> getList(String userId)
     {
-        List<Bpm> bpms =bpmRepository.findUserByBpm(userId);
+        List<Bpm> bpms = bpmRepository.findUserByBpm(userId);
         List<BpmDto> bpmDtos = new ArrayList<>();
         for(Bpm b : bpms){
             BpmDto dto = BpmDto.builder()

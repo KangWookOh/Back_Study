@@ -3,7 +3,12 @@ package com.example.intern2.web.dto;
 import com.example.intern2.web.entity.Bpm;
 import com.example.intern2.web.entity.User;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jdk.jfr.Timestamp;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,6 +24,8 @@ public class BpmDto {
 
     private long user_id;
     private User uid;
+
+
 
 
 

@@ -31,13 +31,14 @@ public class BpmTest {
     {
         Optional<User> byId  = userRepository.findById(1L);
 
+
         for(int i=0; i<20; i++)
         {
             BpmDto build = BpmDto.builder()
                     .dia(120+i)
                     .sys(80+i)
                     .pulse(100+i)
-                    .user(byId.get())
+                    .uid(byId.stream().findAny().get())
                     .build();
             bpmService.input(build);
         }
