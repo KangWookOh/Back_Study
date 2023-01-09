@@ -15,9 +15,12 @@
         <label>이름</label>
         <input type="text" name="" id="userName" v-model="userName" class="form-control form-control-lg" />
       </div>
-      <button type="submit" class="btn btn-dark btn-lg btn-block">
-        로그인
-      </button>
+      <div>
+        <button @click="submitForm" type="submit">
+          <router-link to="/login">회원가입</router-link>
+        </button>
+      </div>
+
     </form>
   </div>
 </template>
@@ -27,29 +30,37 @@ export default {
   name: "UserSignUp",
   data() {
     return {
+      id:'',
       userId: '',
       userPw: '',
-      userName:''
+      userName:'',
     };
+
   },
   methods:{
     submitForm: function (){
-      console.log(this.userId,this.userPw,this.userName);
+      console.log(this.userId,this.userPw,this.userName,this.id);
       const URL ='http://localhost:8001/api/signup'
       var data ={
+
         userId :this.userId,
         userPw : this.userPw,
-        username :this.userName
+        userName :this.userName,
+        id:this.id
       }
+
       axios.post(URL,data)
           .then(function (response)
           {
             console.log(response)
+            data.id =JSON.parse(response.data.id)
           })
           .catch(function (error)
           {
             console.log(error)
+            alert("회원가입에 실패했습니다")
           });
+
     }
   }
 }

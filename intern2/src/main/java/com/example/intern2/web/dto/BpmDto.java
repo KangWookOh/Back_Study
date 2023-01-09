@@ -4,8 +4,11 @@ import com.example.intern2.web.entity.Bpm;
 import com.example.intern2.web.entity.User;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jdk.jfr.Timestamp;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -22,20 +25,25 @@ public class BpmDto {
 
     private Integer pulse;
 
-    private long user_id;
-    private User uid;
+    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd",timezone = "Aisa/Seoul")
+    private LocalDateTime dateTime;
+    
+    private long userId;
+    private User user_id;
 
 
 
 
 
     @Builder
-    public BpmDto(Integer sys ,Integer dia ,Integer pulse,User uid)
+    public BpmDto(Integer sys ,Integer dia ,Integer pulse,User user_id,LocalDateTime dateTime)
     {
         this.sys =sys;
         this.dia=dia;
         this.pulse=pulse;
-        this.uid=uid;
+        this.user_id=user_id;
+        this.dateTime=dateTime;
 
     }
 

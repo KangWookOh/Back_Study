@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
-const target = 'http://localhost:8001'
+const target = 'http://localhost:8001/api'
 
 module.exports = defineConfig({
 
@@ -9,7 +9,7 @@ module.exports = defineConfig({
     port:8080,
     proxy:{
       api:{
-        target,
+        target: process.env.VUE_APP_API_URL,
         changeOrigin:true
       }
     }

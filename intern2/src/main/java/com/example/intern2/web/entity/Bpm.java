@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -28,22 +29,26 @@ public class Bpm {
 
     private Integer pulse;
 
+    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd",timezone = "Aisa/Seoul")
+    private LocalDateTime dateTime;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User uid;
+    private User user_id;
 
 
 
     @Builder
-    public Bpm(Integer sys, Integer dia ,Integer pulse,User uid)
+    public Bpm(Integer sys, Integer dia ,Integer pulse,User user_id)
     {
         this.sys =sys;
         this.dia = dia;
         this.pulse = pulse;
-        this.uid=uid;
+        this.user_id=user_id;
     }
 
 }

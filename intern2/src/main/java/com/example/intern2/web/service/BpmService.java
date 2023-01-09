@@ -1,5 +1,6 @@
 package com.example.intern2.web.service;
 
+import com.example.intern2.web.auth.jwt.JwtProvider;
 import com.example.intern2.web.dto.BpmDto;
 import com.example.intern2.web.entity.Bpm;
 import com.example.intern2.web.entity.User;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +21,20 @@ public class BpmService {
     private final BpmRepository bpmRepository;
     private final UserRepository userRepository;
 
+    private final JwtProvider jwtProvider;
+
     @Transactional
     public Bpm input(BpmDto bpmDto)
     {
-        User user =userRepository.findById(bpmDto.getUser_id()).get();
+
+
+        User user =userRepository.findById(bpmDto.getUserId()).get();
+
         Bpm bpm =Bpm.builder()
                 .dia(bpmDto.getDia())
                 .sys(bpmDto.getSys())
                 .pulse(bpmDto.getPulse())
-                .uid(user)
+                .user_id(user)
                 .build();
 
 
@@ -45,10 +52,11 @@ public class BpmService {
         List<BpmDto> bpmDtos = new ArrayList<>();
         for(Bpm b : bpms){
             BpmDto dto = BpmDto.builder()
-                    .uid(b.getUid())
+                    .user_id(b.getUser_id())
                     .dia(b.getDia())
                     .sys(b.getSys())
                     .pulse(b.getPulse())
+                    .dateTime(b.getDateTime())
                     .build();
 
             bpmDtos.add(dto);
