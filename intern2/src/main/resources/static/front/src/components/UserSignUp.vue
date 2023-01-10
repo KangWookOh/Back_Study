@@ -50,6 +50,7 @@ export default {
       }
 
       axios.post(URL,data)
+
           .then(function (response)
           {
             console.log(response)

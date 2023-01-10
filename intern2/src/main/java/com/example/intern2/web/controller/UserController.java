@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.plaf.PanelUI;
 import java.io.IOException;
 
@@ -30,10 +31,11 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
     @PostMapping("/login")
-    public ResponseEntity<?>login(@RequestBody UserDto userDto) throws Exception
+    public ResponseEntity<?>login(@RequestBody UserDto userDto, HttpServletResponse response) throws Exception
     {
         userService.login(userDto.getUserId(),userDto.getUserPw());
         String token = jwtProvider.createToken(userDto.getUserId(),userDto.getRoles());
+        response.setHeader("Auth",token);
         return ResponseEntity.ok(token);
 
     }

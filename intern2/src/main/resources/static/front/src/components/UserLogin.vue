@@ -20,42 +20,48 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
   name: "UserLogin",
   data() {
     return {
       userId: '',
       userPw: '',
-      result :''
+      token :''
     };
   },
   methods: {
-
-    submitForm : function () {
-      console.log(this.userId, this.userPw,this.result);
-      const URL = 'http://localhost:8001/api/login'
+     submitForm() {
       var data = {
         userId: this.userId,
-        userPw: this.userPw,
+        userPw: this.userPw
+      };
+
+      if (!data.userId || !data.userPw) {
+        alert("사용자 정보가 없습니다.")
       }
-      var data2={
-        result : this.result
-      }
-      axios.post(URL , data)
-          .then(function (response) {
-            console.log(response)
-             data2.result=response.data
-            console.log(data2.result)
-            alert("로그인에 성공했습니다.")
+       axios
+          .post("http://localhost:8001/api/login", data)
+          .then(res => {
+            if (res.status === 200) {
+              this.result = res.data
+              console.log(this.result)
+              this.token = this.result.data
+              console.log("token" + this.token)
+
+              this.$cookie.set("accessToken", res.data, 1);
+
+              axios.defaults.headers.common["x-access-token"] = res.data;
+              alert("로그인 성공")
+            }
           })
-          .catch(function (error) {
-            console.log(error)
-            alert("로그인에 실패 하였습니다")
-          });
+          .catch(err => {
+            alert("로그인 실패 " + err)
+          })
     }
   }
 
-}
+};
 </script>
 <style scoped>
 </style>

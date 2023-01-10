@@ -7,36 +7,35 @@
 
 <script>
 import axios from "axios";
-import UserLogin from "@/components/UserLogin.vue";
+
 export default {
   name: "MyList",
   data(){
+
     return {
-      result:'',
-      token : UserLogin.data().result
+      result:''
   };
   },
   methods:{
-    getList : function () {
-      console.log(this.result)
-
+    async getList() {
       var data ={
         result:this.result
 
       }
-      var data2 ={
-        token:UserLogin.data().result
-      }
       const URL ='http://localhost:8001/api/list'
-      axios.get(URL,data,data2)
+
+
+      axios.get(URL,data,{
+        headers: this.cookies.get("accessToken")
+
+      })
 
           .then(res =>{
-            this.result =JSON.stringify(res.data)
             console.log(res)
-            console.log(data2.token)
+
           })
           .catch(err =>{
-            this.result =JSON.stringify(err);
+            alert("실패 ",err);
           });
     },
   }

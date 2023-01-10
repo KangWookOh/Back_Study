@@ -22,7 +22,7 @@
 
 
       <button @click="submitForm" type="submit">
-        <router-link to="/MyList">협압등록 </router-link>
+        <router-link to="/list">협압등록 </router-link>
       </button>
 
       <button type="submit">
@@ -57,7 +57,9 @@ export default {
         pulse:this.pulse,
         userId:this.userId
       }
-      axios.post(URL , data)
+      axios.post(URL , data,{
+
+      })
           .then(function (response) {
             console.log(response)
             console.log(data.userId)
