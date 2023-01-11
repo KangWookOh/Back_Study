@@ -55,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()      // 아무나 접근 가능한 리소스
-                .anyRequest().hasRole("USER")                   // 그외는 ROLE_USER 권한이 필요함 명시
                 .and()
 
                 // jwt 인증 필터를 UsernamePasswordAuthenticationFilter 전에 사용

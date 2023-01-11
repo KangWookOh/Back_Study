@@ -8,12 +8,13 @@
 <script>
 import axios from "axios";
 
+
 export default {
   name: "MyList",
   data(){
 
     return {
-      result:''
+      result:[]
   };
   },
   methods:{
@@ -25,14 +26,11 @@ export default {
       const URL ='http://localhost:8001/api/list'
 
 
-      axios.get(URL,data,{
-        headers: this.cookies.get("accessToken")
-
-      })
-
+      axios.get(URL,data)
           .then(res =>{
+            this.result =res.data
+            console.log(this.result)
             console.log(res)
-
           })
           .catch(err =>{
             alert("실패 ",err);

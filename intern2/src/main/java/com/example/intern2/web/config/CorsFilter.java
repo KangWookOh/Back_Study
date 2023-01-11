@@ -25,7 +25,7 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*"); // TODO: devi says, in production environments, face this * inwards
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, X-Auth-Token, Content-Type");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, X-Auth-Token, Content-Type, x-access-token, Authorization");
         logger.info("CORS headers were set");
         chain.doFilter(req,res);
     }

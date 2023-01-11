@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -31,9 +33,13 @@ public class BpmController {
     @GetMapping("/list")
     public ResponseEntity<List<BpmDto>> getList(HttpServletRequest request)//HttpServletRequest request)
     {
+
         String token =jwtProvider.resolveToken(request);
+        log.info("token :{}",token);
         String userId = jwtProvider.getUserId(token);
+        log.info("userId :{}",userId);
         List<BpmDto> list = bpmService.getList(userId);
+
         return ResponseEntity.ok().body(list);
     }
 

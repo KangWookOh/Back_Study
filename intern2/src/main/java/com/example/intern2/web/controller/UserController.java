@@ -35,7 +35,7 @@ public class UserController {
     {
         userService.login(userDto.getUserId(),userDto.getUserPw());
         String token = jwtProvider.createToken(userDto.getUserId(),userDto.getRoles());
-        response.setHeader("Auth",token);
+        response.setHeader("Authorization",token);
         return ResponseEntity.ok(token);
 
     }

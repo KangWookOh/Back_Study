@@ -46,12 +46,12 @@ export default {
             if (res.status === 200) {
               this.result = res.data
               console.log(this.result)
-              this.token = this.result.data
+              this.token = res.data
               console.log("token" + this.token)
 
-              this.$cookie.set("accessToken", res.data, 1);
+              this.$cookie.set("Authorization", res.data, 1);
 
-              axios.defaults.headers.common["x-access-token"] = res.data;
+              axios.defaults.headers.common["Authorization"] = res.data;
               alert("로그인 성공")
             }
           })

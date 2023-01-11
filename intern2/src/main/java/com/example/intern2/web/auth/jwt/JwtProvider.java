@@ -1,10 +1,7 @@
 package com.example.intern2.web.auth.jwt;
 
 import com.example.intern2.web.service.CustomUserDetailsService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,10 +53,7 @@ public class JwtProvider {
                 .compact();
     }
 
-    public Long getValidationAccessTokenTime()
-    {
-        return ACCESS_TOKEN_VALIDATiON_SECOND;
-    }
+
 
     // Jwt 로 인증정보를 조회
     public Authentication getAuthentication(String token)
@@ -100,9 +94,13 @@ public class JwtProvider {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token);
             return !claimsJws.getBody().getExpiration().before(new Date()); // 만료날짜가 현재보다 이전이면 false
-        } catch (Exception e) {
+        }catch (MalformedJwtException e){
+            log.error("JWT token is expired: {}", e.getMessage());
+        }
+        catch (Exception e) {
             return false;
         }
+        return false;
     }
 
 
