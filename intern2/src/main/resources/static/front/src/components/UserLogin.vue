@@ -11,8 +11,8 @@
         <input type="password" name="" id="userPw" v-model="userPw" class="form-control form-control-lg" />
       </div>
 
-      <button @click="submitForm" type="submit">
-        <router-link to="/add">로그인</router-link>
+      <button class="button" @click="submitForm" type="submit">
+        로그인
       </button>
 
     </form>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "UserLogin",
@@ -38,7 +39,8 @@ export default {
       };
 
       if (!data.userId || !data.userPw) {
-        alert("사용자 정보가 없습니다.")
+        alert("사용자 정보가 없습니다 회원가입 해주세요.")
+        router.push("/signup")
       }
        axios
           .post("http://localhost:8001/api/login", data)
@@ -53,6 +55,7 @@ export default {
 
               axios.defaults.headers.common["Authorization"] = res.data;
               alert("로그인 성공")
+              router.push("/")
             }
           })
           .catch(err => {
@@ -64,4 +67,10 @@ export default {
 };
 </script>
 <style scoped>
+.button{
+  box:color cadetblue;
+}
+.form-control{
+  color: blue;
+}
 </style>

@@ -17,7 +17,7 @@
       </div>
       <div>
         <button @click="submitForm" type="submit">
-          <router-link to="/login">회원가입</router-link>
+          회원가입
         </button>
       </div>
 
@@ -26,6 +26,7 @@
 </template>
 <script>
 import axios from 'axios'
+import router from "@/router";
 export default {
   name: "UserSignUp",
   data() {
@@ -41,13 +42,13 @@ export default {
     submitForm: function (){
       console.log(this.userId,this.userPw,this.userName,this.id);
       const URL ='http://localhost:8001/api/signup'
-      var data ={
+      const data = {
 
-        userId :this.userId,
-        userPw : this.userPw,
-        userName :this.userName,
-        id:this.id
-      }
+        userId: this.userId,
+        userPw: this.userPw,
+        userName: this.userName,
+        id: this.id
+      };
 
       axios.post(URL,data)
 
@@ -55,11 +56,14 @@ export default {
           {
             console.log(response)
             data.id =JSON.parse(response.data.id)
+            alert("회원가입에 성공하셧습니다.")
+            router.push("/login")
           })
           .catch(function (error)
           {
             console.log(error)
             alert("회원가입에 실패했습니다")
+            router.push("/signup")
           });
 
     }

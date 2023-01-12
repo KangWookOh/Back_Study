@@ -36,6 +36,7 @@ public class BpmController {
 
         String token =jwtProvider.resolveToken(request);
         log.info("token :{}",token);
+        log.info("info={}",jwtProvider.getAuthentication(token));
         String userId = jwtProvider.getUserId(token);
         log.info("userId :{}",userId);
         List<BpmDto> list = bpmService.getList(userId);

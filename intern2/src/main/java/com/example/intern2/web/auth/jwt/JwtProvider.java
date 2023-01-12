@@ -72,7 +72,8 @@ public class JwtProvider {
     public String getUserId(String token)
     {
 
-        String substring =token.substring("Bearer".length());
+        //String substring =token.substring("Bearer".length());
+        String substring = token;
         log.info("넘어온 토큰 = {}", substring);
         Claims body = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(substring).getBody();
         String userId = String.valueOf(body.getSubject());
