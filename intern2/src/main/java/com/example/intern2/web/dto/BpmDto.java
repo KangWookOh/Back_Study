@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import jdk.jfr.Timestamp;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,14 +20,15 @@ import java.time.LocalDateTime;
 
 public class BpmDto {
 
+    @ApiModelProperty(value = "diastole")
     private Integer sys;
-
+    @ApiModelProperty(value = "systolic")
     private Integer dia;
-
+    @ApiModelProperty(value = "heart_rate")
     private Integer pulse;
 
     @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd",timezone = "Aisa/Seoul")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Aisa/Seoul")
     private LocalDateTime dateTime;
     
     private long userId;

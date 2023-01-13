@@ -3,13 +3,14 @@
     <form>
       <H1>혈압 수동 입력</H1>
       <div class="form-group">
-      <label>DIA</label>
-      <input type="text" name="" id="dia" v-model="dia" class="form-control form-control-lg" />
-    </div>
         <div class="form-group">
           <label>SYS</label>
           <input type="text" name="" id="sys" v-model="sys" class="form-control form-control-lg" />
         </div>
+      <label>DIA</label>
+      <input type="text" name="" id="dia" v-model="dia" class="form-control form-control-lg" />
+    </div>
+
         <div class="form-group">
           <label>PULSE</label>
           <input type="text" name="" id="pulse" v-model="pulse" class="form-control form-control-lg" />
