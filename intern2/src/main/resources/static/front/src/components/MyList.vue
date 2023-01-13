@@ -4,7 +4,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내정보 확인</title>
-
 </head>
   <body>
   <div>
@@ -19,33 +18,30 @@
       </thead>
       <tbody>
       <tr v-for="(user,index) in users" :key="index">
-        <td v-text="user.sys"></td>
-        <td v-text="user.dia"></td>
-        <td v-text="user.pulse"></td>
-        <td v-text="user.dateTime"></td>
-
-
+<!--        <td v-text="user.dia"></td>-->
+<!--        <td v-text="user.sys"></td>-->
+<!--        <td v-text="user.pulse"></td>-->
+<!--        <td v-text="user.dateTime"></td>-->
+        <td>{{users.sys}}</td>
+        <td>{{users.dia}}</td>
+        <td>{{users.pulse}}</td>
+        <td>{{users.dateTime}}</td>
 
       </tr>
       </tbody>
     </table>
   </div>
   </body>
-
-
 </template>
-
 <script>
 import axios from "axios";
 import router from "@/router";
-
 export default {
   name: "MyList",
   data(){
     return {
       result:[],
-      users:[ ]
-
+      users:[]
   };
   },
   created() {
@@ -54,14 +50,9 @@ export default {
   methods:{
      getList : async function () {
        var data = {
-         user_id: this.user_id,
-         dia: this.dia,
-         sys: this.sys,
-         pulse: this.pulse,
-         date: this.date,
+
          result: this.result,
          users: this.users
-
        }
        const URL = 'http://localhost:8001/api/list'
        await axios
@@ -72,7 +63,6 @@ export default {
              }
            })
            .then(res => {
-
              res.data.map((userList) => {
                this.result = userList;
                console.log(this.result)

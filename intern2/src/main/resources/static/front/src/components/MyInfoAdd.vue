@@ -24,6 +24,7 @@
       <button type="submit" @click="submitForm">
         홈으로
       </button>
+      <button type="submit" @click="reload">재측정</button>
 
     </form>
   </div>
@@ -32,10 +33,8 @@
 <script>
 import axios from "axios";
 import router from "@/router";
-
 export default {
   name: "MyInfoAdd",
-
   data() {
     return {
       dia: '',
@@ -45,6 +44,9 @@ export default {
     };
   },
   methods: {
+    reload:function(){
+      window.location.ref("/")
+    },
     submitForm : function () {
       console.log(this.dia, this.sys,this.pulse,this.userId);
       const URL = 'http://localhost:8001/api/register'

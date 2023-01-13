@@ -26,8 +26,6 @@ public class BpmService {
     @Transactional
     public Bpm input(BpmDto bpmDto)
     {
-
-
         User user =userRepository.findById(bpmDto.getUserId()).get();
 
         Bpm bpm =Bpm.builder()
